@@ -183,41 +183,7 @@ const questions = [
   },
 ];
 
-// ─── Fallback (algoritmo interno) ─────────────────────────────
-const fallbackResults = {
-  iphone_se:       {model:'iPhone SE (3ª geração)', desc:'Ideal pra uso básico com preço acessível.', pros:['Compacto, barato, rápido'], cons:['Tela pequena, sem Face ID'], img:'', link1:'', link2:''},
-  iphone_13:       {model:'iPhone 13',              desc:'Melhor custo-benefício pra uso cotidiano.', pros:['Câmera dupla, bateria ótima'], cons:['Sem 120Hz, sem USB-C'],    img:'', link1:'', link2:''},
-  iphone_14:       {model:'iPhone 14',              desc:'Segurança moderna e câmera refinada.',       pros:['Crash Detection, autofoco frontal'], cons:['Mesmo chip do 13'],   img:'', link1:'', link2:''},
-  iphone_15:       {model:'iPhone 15',              desc:'USB-C e Dynamic Island ao preço padrão.',   pros:['USB-C, 48MP, Dynamic Island'], cons:['Sem 120Hz'],               img:'', link1:'', link2:''},
-  iphone_15_pro:   {model:'iPhone 15 Pro',          desc:'Câmera tripla profissional + ProMotion.',   pros:['Zoom 3x, 120Hz, titânio'], cons:['Preço elevado'],              img:'', link1:'', link2:''},
-  iphone_16:       {model:'iPhone 16',              desc:'O iPhone da IA com chip A18.',              pros:['Apple Intelligence, A18'], cons:['Sem 120Hz'],                   img:'', link1:'', link2:''},
-  iphone_16_pro:   {model:'iPhone 16 Pro',          desc:'O melhor geral: IA + câmera pro.',          pros:['A18 Pro, zoom 5x, 120Hz'], cons:['Preço mais alto'],            img:'', link1:'', link2:''},
-  iphone_16_pro_max:{model:'iPhone 16 Pro Max',     desc:'Sem limites: bateria + câmera + tela.',     pros:['Bateria máxima, tela 6,9"'], cons:['O mais caro da linha'],      img:'', link1:'', link2:''},
-};
 
-function getFallbackKey() {
-  const {budget, uso, camera, tela, bateria, tecnologia, longevidade} = answers;
-  let scores = Object.fromEntries(Object.keys(fallbackResults).map(k=>[k,0]));
-  if(budget==='low'){scores.iphone_se+=5;scores.iphone_13+=3;}
-  if(budget==='mid'){scores.iphone_13+=4;scores.iphone_14+=5;scores.iphone_15+=3;}
-  if(budget==='high'){scores.iphone_15+=4;scores.iphone_15_pro+=5;scores.iphone_16+=4;}
-  if(budget==='premium'){scores.iphone_16_pro+=5;scores.iphone_16_pro_max+=5;}
-  if(uso==='basic'){scores.iphone_se+=4;scores.iphone_13+=3;}
-  if(uso==='photo'){scores.iphone_15_pro+=4;scores.iphone_16_pro+=5;scores.iphone_15+=3;}
-  if(uso==='gaming'){scores.iphone_16+=4;scores.iphone_16_pro+=5;scores.iphone_15_pro+=4;}
-  if(uso==='work'){scores.iphone_15+=3;scores.iphone_16+=4;scores.iphone_16_pro+=5;}
-  if(camera==='selfie'||camera==='none'){scores.iphone_se+=2;scores.iphone_13+=2;}
-  if(camera==='good'){scores.iphone_14+=3;scores.iphone_15+=4;scores.iphone_16+=4;}
-  if(camera==='pro'){scores.iphone_15_pro+=5;scores.iphone_16_pro+=5;scores.iphone_16_pro_max+=5;}
-  if(tela==='small'){scores.iphone_se+=5;}
-  if(tela==='large'){scores.iphone_16_pro+=3;scores.iphone_16_pro_max+=5;}
-  if(bateria==='heavy'||bateria==='travel'){scores.iphone_16_pro_max+=5;scores.iphone_16+=3;}
-  if(tecnologia==='ai'){scores.iphone_16+=5;scores.iphone_16_pro+=5;scores.iphone_16_pro_max+=5;}
-  if(tecnologia==='display'){scores.iphone_15_pro+=4;scores.iphone_16_pro+=5;}
-  if(longevidade==='long'){scores.iphone_16_pro+=5;scores.iphone_16_pro_max+=5;}
-  if(longevidade==='short'){scores.iphone_se+=2;scores.iphone_13+=2;}
-  return Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
-}
 
 // ─── State ────────────────────────────────────────────────────
 let answers = {};
@@ -353,25 +319,27 @@ function showResult() {
   document.getElementById('intro-header').style.display = 'none';
 
   const sheetRow = lookupSheets();
-  const fromSheets = !!sheetRow;
 
-  let model, desc, pros, cons, imgUrl, link1, link2;
-
-  if (fromSheets) {
-    model  = sheetRow['modelo_indicado'] || '—';
-    desc   = sheetRow['descricao']       || '';
-    pros   = (sheetRow['pros']   || '').split(';').map(s=>s.trim()).filter(Boolean);
-    cons   = (sheetRow['contras']|| '').split(';').map(s=>s.trim()).filter(Boolean);
-    imgUrl = sheetRow['imagem_url']   || '';
-    link1  = sheetRow['link_compra_1']|| '';
-    link2  = sheetRow['link_compra_2']|| '';
-  } else {
-    const key = getFallbackKey();
-    const fb  = fallbackResults[key];
-    model  = fb.model; desc = fb.desc;
-    pros   = fb.pros;  cons = fb.cons;
-    imgUrl = ''; link1 = ''; link2 = '';
+  if (!sheetRow) {
+    document.getElementById('question-area').innerHTML = `
+      <div class="result-screen">
+        <div class="result-hero" style="text-align:center">
+          <div style="font-size:56px;margin-bottom:16px">🤔</div>
+          <div class="result-model" style="font-size:24px;margin-bottom:12px"><span>Combinação não encontrada</span></div>
+          <p class="result-desc">Essa combinação de respostas ainda não está na planilha. Tente refazer o quiz com outras escolhas.</p>
+        </div>
+        <button class="btn-restart" onclick="restartQuiz()">↺ Refazer o questionário</button>
+      </div>`;
+    return;
   }
+
+  const model  = sheetRow['modelo_indicado'] || '—';
+  const desc   = sheetRow['descricao']       || '';
+  const pros   = (sheetRow['pros']   || '').split(';').map(s=>s.trim()).filter(Boolean);
+  const cons   = (sheetRow['contras']|| '').split(';').map(s=>s.trim()).filter(Boolean);
+  const imgUrl = sheetRow['imagem_url']   || '';
+  const link1  = sheetRow['link_compra_1']|| '';
+  const link2  = sheetRow['link_compra_2']|| '';
 
   const imgHtml = imgUrl
     ? `<img src="${imgUrl}" alt="${model}" class="result-img" onerror="this.style.display='none'">`
@@ -391,9 +359,7 @@ function showResult() {
       ${link2 ? `<a href="${link2}" target="_blank" rel="noopener" class="buy-btn buy-btn-secondary">🔗 Ver opção 2</a>` : ''}
     </div>` : '';
 
-  const sourceBadge = fromSheets
-    ? `<div style="text-align:center;margin-bottom:16px"><span class="source-badge">✦ Indicação personalizada</span></div>`
-    : '';
+  const sourceBadge = `<div style="text-align:center;margin-bottom:16px"><span class="source-badge">✦ Indicação personalizada</span></div>`;
 
   document.getElementById('question-area').innerHTML = `
     <div class="result-screen">
