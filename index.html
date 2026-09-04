@@ -109,17 +109,10 @@ const QUESTIONS = {
   budget: {
     icon:'💰', text:'Qual é o seu orçamento aproximado?',
     options:[
-      {icon:'🍏', label:'Até R$ 2.800',            desc:'Quero gastar o mínimo possível',                    next:'apple'},
+      {icon:'🍏', label:'Até R$ 2.800',            desc:'Quero gastar o mínimo possível',                    next:'result:budgetApple'},
       {icon:'🟢', label:'R$ 2.800 a R$ 4.500',      desc:'Bom custo-benefício, sem exagerar',                 next:'entry'},
       {icon:'🟡', label:'R$ 4.500 a R$ 6.000',      desc:'Posso investir um pouco mais',                      next:'wide'},
       {icon:'🔵', label:'Acima de R$ 6.000',        desc:'Quero o topo de linha',                             next:'size'},
-    ]
-  },
-  apple: {
-    icon:'🤔', text:'Precisa ser Apple mesmo?',
-    options:[
-      {icon:'🍏', label:'Sim, tem que ser iPhone',        desc:'Pego o mais recente que couber no bolso',      next:'result:budgetApple'},
-      {icon:'🤖', label:'Não, pra que eu tô aqui então?',  desc:'Tanto faz a marca, quero o melhor custo',      next:'result:samsung'},
     ]
   },
   entry: {
@@ -130,7 +123,7 @@ const QUESTIONS = {
     ]
   },
   wide: {
-    icon:'🌄', text:'Você sabe o que é (e usa direto) uma câmera ultra grande angular?',
+    icon:'🌄', text:'Você sabe o que é uma câmera ultra grande angular (pra fotos bem abertas, tipo paisagens) e pretende usar isso com frequência?',
     options:[
       {icon:'📷', label:'Uso com frequência',     desc:'Quero esse recurso no dia a dia',                     next:'result:base'},
       {icon:'💸', label:'Prefiro economizar',     desc:'Uma câmera boa já me atende',                         next:'result:e'},
@@ -191,19 +184,12 @@ const RESULTS = {
     cons:["Esquenta mais em uso pesado","Sem os recursos mais recentes de IA"]
   },
   budgetApple: {
-    tag:"Exceção · Apple", name:"O iPhone mais recente que couber no bolso", price:"Até R$ 2.800",
-    desc:"Precisa ser Apple, custando menos de 2.800? Pegue o modelo usado ou seminovo menos velho que você conseguir pagar — sem crise de consciência.",
+    tag:"Custo Mínimo", name:"O iPhone mais recente que couber no bolso", price:"Até R$ 2.800",
+    desc:"Com esse orçamento, esquece os modelos novos. Pegue o iPhone usado ou seminovo menos velho que você conseguir pagar — sem crise de consciência.",
     img:"https://http2.mlstatic.com/D_NQ_NP_779617-MLA71782867320_092023-F.jpg",
     pros:["Continua no ecossistema Apple","Melhor preço possível dentro da marca"],
     cons:["Modelo mais antigo","Vida útil de atualizações mais curta"]
   },
-  samsung: {
-    tag:"Exceção · Android", name:"Qualquer Samsung da linha Galaxy", price:"O que o dinheiro der",
-    desc:"Não faz questão de ser Apple? Então relaxa — pega o Galaxy que caber no orçamento e segue a vida. Ninguém vai te julgar aqui.",
-    img:"https://http2.mlstatic.com/D_NQ_NP_706729-MLA109635117409_032026-B.jpg",
-    pros:["Muito mais opções dentro do orçamento","Ecossistema Android mais flexível"],
-    cons:["Troca de ecossistema, se você vem de iPhone"]
-  }
 };
 
 // ─── State ────────────────────────────────────────────────────
@@ -215,7 +201,7 @@ function renderIntro() {
   document.getElementById('question-area').innerHTML = `
     <div class="card slide-in" style="text-align:center">
       <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:24px;font-weight:300;">
-        São só <strong style="color:var(--text)">2 perguntas rápidas</strong>: quanto você quer investir, e o que mais importa pra você. Sem tecniquês, sem enrolação.
+        Só <strong style="color:var(--text)">1 ou 2 perguntas rápidas</strong>: quanto você quer investir e, dependendo da faixa, o que mais importa pra você. Sem tecniquês, sem enrolação.
       </p>
       <button class="btn btn-primary" style="width:100%;font-size:16px;padding:18px" onclick="startQuiz()">
         Começar agora →
