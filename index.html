@@ -72,8 +72,13 @@
   .spec-list li { font-size:13px; color:var(--text); font-weight:400; display:flex; align-items:flex-start; gap:8px; line-height:1.4; }
   .spec-list li::before { content:attr(data-icon); flex-shrink:0; font-size:14px; }
   .source-badge { display:inline-flex; align-items:center; gap:6px; padding:6px 12px; background:rgba(125,211,248,0.08); border:1px solid rgba(125,211,248,0.15); border-radius:100px; font-size:11px; color:var(--accent2); margin-bottom:20px; }
-  .btn-restart { width:100%; background:transparent; border:1.5px solid var(--border); color:var(--muted); border-radius:12px; padding:15px; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; cursor:pointer; transition:all 0.2s; margin-top:8px; }
-  .btn-restart:hover { border-color:rgba(255,255,255,0.2); color:var(--text); }
+  .btn-restart { width:100%; background:linear-gradient(135deg,var(--accent3),#ff9a76); border:none; color:#3a1600; border-radius:12px; padding:16px; font-family:'DM Sans',sans-serif; font-size:15px; font-weight:700; cursor:pointer; transition:all 0.2s; margin-top:8px; }
+  .btn-restart:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(255,154,118,0.3); }
+  .insta-card { background:linear-gradient(135deg, rgba(255,214,165,0.08), rgba(125,211,248,0.08)); border:1px solid var(--border); border-radius:var(--radius); padding:26px 28px; margin-top:16px; text-align:center; }
+  .insta-card p { font-size:14px; line-height:1.6; color:var(--text); font-weight:400; margin-bottom:6px; }
+  .insta-card p.dm-line { color:var(--muted); font-size:13px; font-weight:300; margin-bottom:18px; }
+  .insta-btn { display:inline-flex; align-items:center; gap:8px; padding:13px 24px; border-radius:12px; background:linear-gradient(135deg,var(--accent2),#a78bfa); color:#000; text-decoration:none; font-weight:700; font-size:14.5px; transition:all 0.2s ease; }
+  .insta-btn:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(125,211,248,0.25); }
   @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
   @keyframes bounce { 0%{transform:scale(0.5);opacity:0} 70%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
   .slide-in { animation:fadeUp 0.4s ease both; }
@@ -87,7 +92,7 @@
   <div class="header" id="intro-header">
     <div class="logo-badge"><span>🍎</span> Guia iPhone</div>
     <h1>Qual iPhone é<br><em>realmente</em> pra você?</h1>
-    <p class="subtitle">Elaborei esse Quiz para te ajudar a escolher, num piscar de olhos, o melhor Iphone para você!.</p>
+    <p class="subtitle">Comece pelo orçamento e responda mais uma pergunta rápida — a gente te diz exatamente qual modelo (ou se nem precisa ser um iPhone) combina com você.</p>
   </div>
   <div class="progress-wrap" id="progress-section" style="display:none">
     <div class="progress-meta">
@@ -99,7 +104,6 @@
   <div id="question-area"></div>
   <div class="actions" id="actions-area" style="display:none">
     <button class="btn btn-ghost" id="btn-back" onclick="goBack()">← Voltar</button>
-    <button class="btn btn-primary" id="btn-next" onclick="goNext()" disabled>Continuar →</button>
   </div>
 </div>
 
@@ -109,7 +113,7 @@ const QUESTIONS = {
   budget: {
     icon:'💰', text:'Qual é o seu orçamento aproximado?',
     options:[
-      {icon:'🟠', label:'Até R$ 2.800',            desc:'Quero gastar o mínimo possível',                    next:'result:budgetApple'},
+      {icon:'🍏', label:'Até R$ 2.800',            desc:'Quero gastar o mínimo possível',                    next:'result:budgetApple'},
       {icon:'🟢', label:'R$ 2.800 a R$ 4.500',      desc:'Bom custo-benefício, sem exagerar',                 next:'entry'},
       {icon:'🟡', label:'R$ 4.500 a R$ 6.000',      desc:'Posso investir um pouco mais',                      next:'wide'},
       {icon:'🔵', label:'Acima de R$ 6.000',        desc:'Quero o topo de linha',                             next:'size'},
@@ -126,7 +130,6 @@ const QUESTIONS = {
     icon:'🌄', text:'Você sabe o que é uma câmera ultra grande angular (pra fotos bem abertas, tipo paisagens) e pretende usar isso com frequência?',
     options:[
       {icon:'📷', label:'Uso com frequência',     desc:'Quero esse recurso no dia a dia',                     next:'result:base'},
-      {icon:'💸', label:'Prefiro economizar',     desc:'Uma câmera boa já me atende',                         next:'result:e'},
       {icon:'📸', label:'Quero o máximo de câmeras possível', desc:'Mesmo que seja um modelo mais antigo, não ligo se esquentar', next:'result:iphone15pro'},
     ]
   },
@@ -142,51 +145,51 @@ const QUESTIONS = {
 // ─── Resultados ───────────────────────────────────────────────
 const RESULTS = {
   proMax: {
-    tag:"Caro e Grande", name:"iPhone Pro Max (16/17/Mais Recente)", price:"Acima de R$ 7.000",
-    desc:"Você quer a câmera com zoom de longa distância E uma tela e bateria enormes. Parabéns, seu bolso vai sentir — mas sua galeria de fotos vai agradecer.",
-    img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf8wCvskUeqK1Q5tX33f_hnzCUegKfRI8RhGnQd_D7PZybELnzrzaw4hgo&s=10.jpg",
+    tag:"Caro e Grande", name:"iPhone Pro Max (16/17)", price:"Acima de R$ 7.000",
+    desc:"Você quer a câmera com zoom de longa distância e uma tela e bateria enormes. Parabéns, seu bolso vai sentir — mas sua galeria de fotos vai agradecer.",
+    img:"https://http2.mlstatic.com/D_NQ_NP_870044-MLA108812169320_032026-B.jpg",
     pros:["Zoom óptico de longa distância","Tela e bateria gigantes","O topo de linha absoluto"],
     cons:["O mais caro da linha","Grande e pesado no bolso"]
   },
   pro: {
-    tag:"Caro e Pequeno", name:"iPhone Pro (16/17/Mais Recente)", price:"Acima de R$ 6.000",
-    desc:"Zoom de longa distância? Sim. Tela e bateria XL? Não precisa. Você quer o topo de linha só que num tamanho que caiba no bolso da calça.",
-    img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf8wCvskUeqK1Q5tX33f_hnzCUegKfRI8RhGnQd_D7PZybELnzrzaw4hgo&s=10.jpg",
+    tag:"Caro e Compacto", name:"iPhone Pro (16/17)", price:"Acima de R$ 6.000",
+    desc:"Zoom de longa distância? Sim. Tela e bateria gigante? Não precisa. Você quer o topo de linha só que num tamanho que caiba no bolso da calça.",
+    img:"https://www.content.shi.com/cms-content/accelerator/media/brands/apple/iphone/iphone-17-pro-max/unibody-small.png",
     pros:["Mesmo sistema de câmeras do Pro Max","Tamanho mais compacto","Ainda assim, topo de linha"],
     cons:["Bateria menor que a do Max","Preço ainda salgado"]
   },
   base: {
-    tag:"Intermediário", name:"iPhone (16/17/Mais Recente)", price:"R$ 4.500 – R$ 5.500",
+    tag:"Intermediário", name:"iPhone (16/17)", price:"R$ 4.500 – R$ 5.500",
     desc:"Nada de zoom exagerado, mas você manja de câmera ultra grande angular e usa ela de verdade. Atualizações de software por anos e uma bateria que não te abandona.",
-    img:"https://www.apple.com/newsroom/images/2025/09/apple-debuts-iphone-17/geo/tile/Apple-iPhone-17-hero-250909-lp.jpg.news_app_ed.jpg",
-    pros:["Câmera ultra grande angular","Anos de atualização de software","Boa autonomia de bateria", "Tela ProMotion"],
-    cons:["Sem zoom de longa distância"]
+    img:"https://http2.mlstatic.com/D_NQ_NP_681942-MLA109633991465_032026-B.jpg",
+    pros:["Câmera ultra grande angular","Anos de atualização de software","Boa autonomia de bateria"],
+    cons:["Sem zoom de longa distância","Câmera única principal"]
   },
   e: {
-    tag:"Custo-Benefício", name:"iPhone E (16/17/Mais Recente)", price:"R$ 2.800 – R$ 4.500",
+    tag:"Custo-Benefício", name:"iPhone E (16/17)", price:"R$ 2.800 – R$ 4.500",
     desc:"Uma câmera boa já resolve sua vida e você prefere economizar o resto. Esperto — é o iPhone que faz tudo sem pesar tanto no cartão.",
-    img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkU28G6ZhlVY6gU5ptxQk-RdRRBbbAZ46NqsL0zpd9ww&s.jpeg",
+    img:"https://www.apple.com/id/home/images/heroes/iphone-17e/hero_iphone_17e_announce__e1ip5db56t4y_large.jpg",
     pros:["Melhor custo-benefício da linha atual","Entrada USB-C","Compatível com Apple Intelligence"],
     cons:["Sem câmera ultra grande angular","Menos recursos de câmera no geral"]
   },
   iphone15: {
-    tag:"Sem Apple Inteligence", name:"iPhone 15 (normal)", price:"Usado / seminovo",
-    desc:"Apple Intelligence não é sua prioridade, você não usa nem ChatGPT. Um clássico ainda muito competente pra quem quer economizar de verdade.",
-    img:"https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/iphone_15_hero.png",
-    pros:["Preço de usado bem mais baixo","Dynamic Island","Ainda roda tudo bem", "Entrada USB-C"],
-    cons:["Sem Apple Intelligence"]
+    tag:"Atenção · Usado", name:"iPhone 15 (normal)", price:"Usado / seminovo",
+    desc:"Apple Intelligence não é sua prioridade e entrada Lightning não te assusta. Um clássico ainda muito competente pra quem quer economizar de verdade.",
+    img:"https://http2.mlstatic.com/D_NQ_NP_779617-MLA71782867320_092023-F.jpg",
+    pros:["Preço de usado bem mais baixo","Dynamic Island","Ainda roda tudo bem"],
+    cons:["Entrada Lightning, não USB-C","Sem Apple Intelligence"]
   },
   iphone15pro: {
-    tag:"Esquenta muito", name:"iPhone 15 Pro / Pro Max", price:"Usado / seminovo",
-    desc:"Você quer o máximo de câmeras possível e não liga nem um pouco se o aparelho esquentar no jogo pesado. Respeito.",
-    img:"https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/iphone-15-pro-max.png",
-    pros:["Sistema de câmeras completo","Preço de usado mais acessível que o Pro novo","Corpo em titânio","Compatível com Apple Inteligence"],
-    cons:["Esquenta mais em uso pesado"]
+    tag:"Atenção · Usado", name:"iPhone 15 Pro / Pro Max", price:"Usado / seminovo",
+    desc:"Você quer o máximo de câmeras possível e não liga nem um pouco se o aparelho esquentar em tarefas mais pesadas. Respeito.",
+    img:"https://http2.mlstatic.com/D_NQ_NP_924631-MLA71783367058_092023-F.jpg",
+    pros:["Sistema de câmeras completo","Preço de usado mais acessível que o Pro novo","Corpo em titânio"],
+    cons:["Esquenta mais em uso pesado","Sem os recursos mais recentes de IA"]
   },
   budgetApple: {
     tag:"Custo Mínimo", name:"O iPhone mais recente que couber no bolso", price:"Até R$ 2.800",
     desc:"Com esse orçamento, esquece os modelos novos. Pegue o iPhone usado ou seminovo menos velho que você conseguir pagar — sem crise de consciência.",
-    img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdz6uZJp3pwkGjlS4e0n-RJhSjjG4rCWLvM7WjTnMPLg&s=10.jpg",
+    img:"https://http2.mlstatic.com/D_NQ_NP_779617-MLA71782867320_092023-F.jpg",
     pros:["Continua no ecossistema Apple","Melhor preço possível dentro da marca"],
     cons:["Modelo mais antigo","Vida útil de atualizações mais curta"]
   },
@@ -201,7 +204,7 @@ function renderIntro() {
   document.getElementById('question-area').innerHTML = `
     <div class="card slide-in" style="text-align:center">
       <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:24px;font-weight:300;">
-        Só <strong style="color:var(--text)">2 perguntas rápidas</strong>: quanto você quer investir e, dependendo da faixa, o que mais importa pra você. Sem tecniquês, sem enrolação.
+        Só <strong style="color:var(--text)">1 ou 2 perguntas rápidas</strong>: quanto você quer investir e, dependendo da faixa, o que mais importa pra você. Sem tecniquês, sem enrolação.
       </p>
       <button class="btn btn-primary" style="width:100%;font-size:16px;padding:18px" onclick="startQuiz()">
         Começar agora →
@@ -228,7 +231,6 @@ function renderQuestion() {
   document.getElementById('progress-pct').textContent = `${pct}%`;
   document.getElementById('progress-fill').style.width = `${pct}%`;
   document.getElementById('btn-back').style.display = history.length === 0 ? 'none' : 'block';
-  document.getElementById('btn-next').disabled = true;
 
   document.getElementById('question-area').innerHTML = `
     <div class="card slide-in">
@@ -253,8 +255,9 @@ function selectOption(idx) {
   selectedNext = q.options[idx].next;
   document.querySelectorAll('.option').forEach((el,i)=>{
     el.classList.toggle('selected', i === idx);
+    el.style.pointerEvents = 'none';
   });
-  document.getElementById('btn-next').disabled = false;
+  setTimeout(goNext, 350);
 }
 
 function goNext() {
@@ -308,6 +311,11 @@ function showResult(key) {
         </div>
       </div>
       <button class="btn-restart" onclick="restartQuiz()">↺ Refazer o questionário</button>
+      <div class="insta-card">
+        <p>Gostou do quiz? Aproveita e me segue no Instagram pra mais conteúdo de tecnologia de forma descomplicada 🍏</p>
+        <p class="dm-line">Ainda ficou em dúvida? Me manda uma DM que eu te ajudo a escolher.</p>
+        <a class="insta-btn" href="https://instagram.com/naosounerd.tech" target="_blank" rel="noopener">📸 Seguir @naosounerd.tech</a>
+      </div>
     </div>`;
 }
 
