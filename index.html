@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -58,20 +57,15 @@
   .result-screen { animation:fadeUp 0.7s ease both; }
   .result-hero { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:40px 36px; margin-bottom:20px; text-align:center; position:relative; overflow:hidden; }
   .result-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(125,211,248,0.08) 0%,transparent 70%); }
-  .result-img { width:160px; height:160px; object-fit:contain; margin:0 auto 16px; display:block; border-radius:16px; }
+  .result-img { width:160px; height:160px; object-fit:cover; margin:0 auto 16px; display:block; border-radius:16px; }
   .result-img-placeholder { width:100px; height:100px; margin:0 auto 16px; font-size:72px; line-height:1; display:flex; align-items:center; justify-content:center; animation:bounce 0.6s ease both; }
   .result-tag { display:inline-block; background:rgba(200,240,255,0.08); border:1px solid rgba(200,240,255,0.15); border-radius:100px; padding:5px 14px; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent2); font-weight:600; margin-bottom:16px; }
-  .result-model { font-family:'Playfair Display',serif; font-size:clamp(24px,5vw,40px); font-weight:900; letter-spacing:-0.02em; margin-bottom:12px; line-height:1.1; }
+  .result-model { font-family:'Playfair Display',serif; font-size:clamp(24px,5vw,40px); font-weight:900; letter-spacing:-0.02em; margin-bottom:6px; line-height:1.1; }
   .result-model span { background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  .result-desc { font-size:15px; color:var(--muted); line-height:1.65; max-width:480px; margin:0 auto 24px; font-weight:300; }
-  .buy-buttons { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
-  .buy-btn { display:inline-flex; align-items:center; gap:8px; padding:12px 20px; border-radius:10px; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600; text-decoration:none; transition:all 0.2s; }
-  .buy-btn-primary { background:linear-gradient(135deg,var(--accent2),#a78bfa); color:#000; }
-  .buy-btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(125,211,248,0.3); }
-  .buy-btn-secondary { background:var(--surface2); border:1.5px solid var(--border); color:var(--text); }
-  .buy-btn-secondary:hover { border-color:rgba(255,255,255,0.2); }
+  .result-price { font-size:14px; font-weight:600; color:var(--accent3); margin-bottom:14px; }
+  .result-desc { font-size:15px; color:var(--muted); line-height:1.65; max-width:480px; margin:0 auto 4px; font-weight:300; }
   .specs-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:20px; }
-  @media(max-width:500px){.specs-grid{grid-template-columns:1fr;} .buy-buttons{flex-direction:column;}}
+  @media(max-width:500px){.specs-grid{grid-template-columns:1fr;}}
   .spec-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:20px; }
   .spec-card h4 { font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-bottom:12px; }
   .spec-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
@@ -80,9 +74,6 @@
   .source-badge { display:inline-flex; align-items:center; gap:6px; padding:6px 12px; background:rgba(125,211,248,0.08); border:1px solid rgba(125,211,248,0.15); border-radius:100px; font-size:11px; color:var(--accent2); margin-bottom:20px; }
   .btn-restart { width:100%; background:transparent; border:1.5px solid var(--border); color:var(--muted); border-radius:12px; padding:15px; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; cursor:pointer; transition:all 0.2s; margin-top:8px; }
   .btn-restart:hover { border-color:rgba(255,255,255,0.2); color:var(--text); }
-  .loading-card { display:flex; align-items:center; justify-content:center; gap:14px; padding:32px; color:var(--muted); font-size:15px; }
-  .spinner { width:20px; height:20px; border:2px solid rgba(125,211,248,0.2); border-top-color:var(--accent2); border-radius:50%; animation:spin 0.8s linear infinite; flex-shrink:0; }
-  @keyframes spin { to { transform:rotate(360deg); } }
   @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
   @keyframes bounce { 0%{transform:scale(0.5);opacity:0} 70%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
   .slide-in { animation:fadeUp 0.4s ease both; }
@@ -96,11 +87,11 @@
   <div class="header" id="intro-header">
     <div class="logo-badge"><span>🍎</span> Guia iPhone</div>
     <h1>Qual iPhone é<br><em>realmente</em> pra você?</h1>
-    <p class="subtitle">Responda 7 perguntas e descubra o modelo ideal pro seu estilo de uso e orçamento — sem pagar mais caro do que precisa.</p>
+    <p class="subtitle">Comece pelo orçamento e responda mais uma pergunta rápida — a gente te diz exatamente qual modelo (ou se nem precisa ser um iPhone) combina com você.</p>
   </div>
   <div class="progress-wrap" id="progress-section" style="display:none">
     <div class="progress-meta">
-      <span id="progress-label">Pergunta 1 de 7</span>
+      <span id="progress-label">Pergunta 1 de 2</span>
       <span id="progress-pct">0%</span>
     </div>
     <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
@@ -113,137 +104,120 @@
 </div>
 
 <script>
-// ─────────────────────────────────────────────────────────────
-//  CONFIGURAÇÃO — Cole aqui a URL CSV do Google Sheets
-//  Arquivo → Compartilhar → Publicar na web → CSV → Copiar URL
-// ─────────────────────────────────────────────────────────────
-const SHEETS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTgAsK6yoOJtMp2if_SvV1pAxZMqK4IppxQdKCogccfzyVKiNzyepILTWZw6ZD0GczuUeyMkLOeTFSc/pub?gid=972914178&single=true&output=csv';
+// ─── Perguntas (a árvore original, com o orçamento filtrando o caminho) ─────
+const QUESTIONS = {
+  budget: {
+    icon:'💰', text:'Qual é o seu orçamento aproximado?',
+    options:[
+      {icon:'🍏', label:'Até R$ 2.800',            desc:'Quero gastar o mínimo possível',                    next:'apple'},
+      {icon:'🟢', label:'R$ 2.800 a R$ 4.500',      desc:'Bom custo-benefício, sem exagerar',                 next:'entry'},
+      {icon:'🟡', label:'R$ 4.500 a R$ 6.000',      desc:'Posso investir um pouco mais',                      next:'wide'},
+      {icon:'🔵', label:'Acima de R$ 6.000',        desc:'Quero o topo de linha',                             next:'size'},
+    ]
+  },
+  apple: {
+    icon:'🤔', text:'Precisa ser Apple mesmo?',
+    options:[
+      {icon:'🍏', label:'Sim, tem que ser iPhone',        desc:'Pego o mais recente que couber no bolso',      next:'result:budgetApple'},
+      {icon:'🤖', label:'Não, pra que eu tô aqui então?',  desc:'Tanto faz a marca, quero o melhor custo',      next:'result:samsung'},
+    ]
+  },
+  entry: {
+    icon:'⚖️', text:'Prefere um iPhone novo e mais simples, ou um usado com mais recursos (mesmo sem os lançamentos mais recentes de IA)?',
+    options:[
+      {icon:'✨', label:'Novo e simples',        desc:'Câmera boa já resolve, e eu economizo o resto',        next:'result:e'},
+      {icon:'♻️', label:'Usado, mais completo',  desc:'Não ligo pra Apple Intelligence nem pra entrada Lightning', next:'result:iphone15'},
+    ]
+  },
+  wide: {
+    icon:'🌄', text:'Você sabe o que é (e usa direto) uma câmera ultra grande angular?',
+    options:[
+      {icon:'📷', label:'Uso com frequência',     desc:'Quero esse recurso no dia a dia',                     next:'result:base'},
+      {icon:'💸', label:'Prefiro economizar',     desc:'Uma câmera boa já me atende',                         next:'result:e'},
+      {icon:'📸', label:'Quero o máximo de câmeras possível', desc:'Mesmo que seja um modelo mais antigo, não ligo se esquentar', next:'result:iphone15pro'},
+    ]
+  },
+  size: {
+    icon:'📐', text:'Prefere uma tela e uma bateria maiores, ou um tamanho mais compacto?',
+    options:[
+      {icon:'🔭', label:'Maior, quero tudo grande', desc:'Tela e bateria no talo',                             next:'result:proMax'},
+      {icon:'📱', label:'Mais compacto',            desc:'Topo de linha, só que cabendo no bolso',              next:'result:pro'},
+    ]
+  }
+};
 
-// ─── Perguntas ────────────────────────────────────────────────
-const questions = [
-  {
-    id:'budget', icon:'💰', text:'Qual é o seu orçamento aproximado?',
-    options:[
-      {icon:'🟢', label:'Até R$ 3.500',          desc:'Quero o melhor custo-benefício',              value:'low'},
-      {icon:'🟡', label:'R$ 3.500 a R$ 6.000',   desc:'Disposto a investir um pouco mais',            value:'mid'},
-      {icon:'🔵', label:'R$ 6.000 a R$ 9.000',   desc:'Quero um top de linha acessível',              value:'high'},
-      {icon:'🟣', label:'Acima de R$ 9.000',      desc:'O melhor do mercado, sem compromisso',         value:'premium'},
-    ]
+// ─── Resultados ───────────────────────────────────────────────
+const RESULTS = {
+  proMax: {
+    tag:"Caro e Grande", name:"iPhone Pro Max (16/17)", price:"Acima de R$ 7.000",
+    desc:"Você quer a câmera com zoom de longa distância E uma tela e bateria enormes. Parabéns, seu bolso vai sentir — mas sua galeria de fotos vai agradecer.",
+    img:"https://http2.mlstatic.com/D_NQ_NP_870044-MLA108812169320_032026-B.jpg",
+    pros:["Zoom óptico de longa distância","Tela e bateria gigantes","O topo de linha absoluto"],
+    cons:["O mais caro da linha","Grande e pesado no bolso"]
   },
-  {
-    id:'uso', icon:'📱', text:'Como você usa o celular no dia a dia?',
-    options:[
-      {icon:'💬', label:'Básico',                  desc:'WhatsApp, redes sociais, chamadas, vídeos',   value:'basic'},
-      {icon:'📸', label:'Foco em fotos e vídeos',  desc:'Registro de momentos, viagens, conteúdo',      value:'photo'},
-      {icon:'🎮', label:'Games e performance',      desc:'Jogos pesados, apps exigentes, multitarefa',  value:'gaming'},
-      {icon:'💼', label:'Trabalho e produtividade', desc:'Apps profissionais, edição, videoconferências',value:'work'},
-    ]
+  pro: {
+    tag:"Caro e Pequeno", name:"iPhone Pro (16/17)", price:"Acima de R$ 6.000",
+    desc:"Zoom de longa distância? Sim. Tela e bateria XL? Não precisa. Você quer o topo de linha só que num tamanho que caiba no bolso da calça.",
+    img:"https://www.content.shi.com/cms-content/accelerator/media/brands/apple/iphone/iphone-17-pro-max/unibody-small.png",
+    pros:["Mesmo sistema de câmeras do Pro Max","Tamanho mais compacto","Ainda assim, topo de linha"],
+    cons:["Bateria menor que a do Max","Preço ainda salgado"]
   },
-  {
-    id:'camera', icon:'📷', text:'O que você espera da câmera?',
-    options:[
-      {icon:'🤳', label:'Selfies e uso casual',         desc:'Fotos do dia a dia com boa qualidade',         value:'selfie'},
-      {icon:'🌅', label:'Fotos bonitas sem complicar',  desc:'Resultados automáticos incríveis',             value:'good'},
-      {icon:'🎬', label:'Câmera profissional',           desc:'Zoom óptico, Pro Mode, vídeo 4K avançado',    value:'pro'},
-      {icon:'😐', label:'Câmera não é prioridade',       desc:'Uso só pra registro básico',                   value:'none'},
-    ]
+  base: {
+    tag:"Intermediário", name:"iPhone (16/17)", price:"R$ 4.500 – R$ 5.500",
+    desc:"Nada de zoom exagerado, mas você manja de câmera ultra grande angular e usa ela de verdade. Atualizações de software por anos e uma bateria que não te abandona.",
+    img:"https://http2.mlstatic.com/D_NQ_NP_681942-MLA109633991465_032026-B.jpg",
+    pros:["Câmera ultra grande angular","Anos de atualização de software","Boa autonomia de bateria"],
+    cons:["Sem zoom de longa distância","Câmera única principal"]
   },
-  {
-    id:'tela', icon:'🖥️', text:'Que tipo de tela você prefere?',
-    options:[
-      {icon:'📱', label:'Compacta e fácil de segurar', desc:'Cabe no bolso, uso com uma mão',                value:'small'},
-      {icon:'📲', label:'Tamanho padrão',               desc:'Equilibrado entre tamanho e praticidade',       value:'medium'},
-      {icon:'🖼️', label:'Grande para conteúdo',         desc:'Filmes, jogos, leitura, produtividade',         value:'large'},
-    ]
+  e: {
+    tag:"Custo-Benefício", name:"iPhone E (16/17)", price:"R$ 2.800 – R$ 4.500",
+    desc:"Uma câmera boa já resolve sua vida e você prefere economizar o resto. Esperto — é o iPhone que faz tudo sem pesar tanto no cartão.",
+    img:"https://www.apple.com/id/home/images/heroes/iphone-17e/hero_iphone_17e_announce__e1ip5db56t4y_large.jpg",
+    pros:["Melhor custo-benefício da linha atual","Entrada USB-C","Compatível com Apple Intelligence"],
+    cons:["Sem câmera ultra grande angular","Menos recursos de câmera no geral"]
   },
-  {
-    id:'bateria', icon:'🔋', text:'Como é sua relação com bateria?',
-    options:[
-      {icon:'😌', label:'Carrego o dia normal',         desc:'Uso moderado, sem preocupação',                 value:'light'},
-      {icon:'🌍', label:'Fico longe do carregador',     desc:'Preciso aguentar o dia inteiro com uso intenso',value:'heavy'},
-      {icon:'🗺️', label:'Viajo muito',                  desc:'Preciso de muita autonomia e confiabilidade',   value:'travel'},
-    ]
+  iphone15: {
+    tag:"Exceção · Usado", name:"iPhone 15 (normal)", price:"Usado / seminovo",
+    desc:"Apple Intelligence não é sua prioridade e entrada Lightning não te assusta. Um clássico ainda muito competente pra quem quer economizar de verdade.",
+    img:"https://http2.mlstatic.com/D_NQ_NP_779617-MLA71782867320_092023-F.jpg",
+    pros:["Preço de usado bem mais baixo","Dynamic Island","Ainda roda tudo bem"],
+    cons:["Entrada Lightning, não USB-C","Sem Apple Intelligence"]
   },
-  {
-    id:'tecnologia', icon:'⚡', text:'Recursos avançados importam pra você?',
-    options:[
-      {icon:'🙂', label:'Não muito',                    desc:'O básico bem feito já me satisfaz',             value:'no'},
-      {icon:'🔍', label:'Dynamic Island e ProMotion',   desc:'Tela 120Hz suave e notificações inteligentes',  value:'display'},
-      {icon:'💻', label:'USB-C e conectividade pro',    desc:'Transferência rápida, acessórios, armazenamento',value:'connect'},
-      {icon:'🤖', label:'Apple Intelligence (IA)',       desc:'Recursos de IA exclusivos dos modelos recentes',value:'ai'},
-    ]
+  iphone15pro: {
+    tag:"Exceção · Usado", name:"iPhone 15 Pro / Pro Max", price:"Usado / seminovo",
+    desc:"Você quer o máximo de câmeras possível e não liga nem um pouco se o aparelho esquentar no jogo pesado. Respeito.",
+    img:"https://http2.mlstatic.com/D_NQ_NP_924631-MLA71783367058_092023-F.jpg",
+    pros:["Sistema de câmeras completo","Preço de usado mais acessível que o Pro novo","Corpo em titânio"],
+    cons:["Esquenta mais em uso pesado","Sem os recursos mais recentes de IA"]
   },
-  {
-    id:'longevidade', icon:'🕐', text:'Por quanto tempo planeja usar o aparelho?',
-    options:[
-      {icon:'🔄', label:'1 a 2 anos',     desc:'Costumo trocar com frequência',            value:'short'},
-      {icon:'📅', label:'3 a 4 anos',     desc:'Quero que dure bem e continue rápido',     value:'medium'},
-      {icon:'🏆', label:'5 anos ou mais', desc:'Quero o melhor pra aguentar muito tempo',  value:'long'},
-    ]
+  budgetApple: {
+    tag:"Exceção · Apple", name:"O iPhone mais recente que couber no bolso", price:"Até R$ 2.800",
+    desc:"Precisa ser Apple, custando menos de 2.800? Pegue o modelo usado ou seminovo menos velho que você conseguir pagar — sem crise de consciência.",
+    img:"https://http2.mlstatic.com/D_NQ_NP_779617-MLA71782867320_092023-F.jpg",
+    pros:["Continua no ecossistema Apple","Melhor preço possível dentro da marca"],
+    cons:["Modelo mais antigo","Vida útil de atualizações mais curta"]
   },
-];
-
-
+  samsung: {
+    tag:"Exceção · Android", name:"Qualquer Samsung da linha Galaxy", price:"O que o dinheiro der",
+    desc:"Não faz questão de ser Apple? Então relaxa — pega o Galaxy que caber no orçamento e segue a vida. Ninguém vai te julgar aqui.",
+    img:"https://http2.mlstatic.com/D_NQ_NP_706729-MLA109635117409_032026-B.jpg",
+    pros:["Muito mais opções dentro do orçamento","Ecossistema Android mais flexível"],
+    cons:["Troca de ecossistema, se você vem de iPhone"]
+  }
+};
 
 // ─── State ────────────────────────────────────────────────────
-let answers = {};
-let current = -1;
+let currentId = 'budget';
 let history = [];
-let sheetsData = null; // loaded from Google Sheets
+let selectedNext = null;
 
-// ─── Parse CSV ────────────────────────────────────────────────
-function parseCSV(text) {
-  const lines = text.trim().split('\n');
-  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
-  return lines.slice(1).map(line => {
-    // Handle quoted fields with commas
-    const cols = [];
-    let cur = ''; let inQ = false;
-    for (let ch of line) {
-      if (ch === '"') { inQ = !inQ; }
-      else if (ch === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
-      else { cur += ch; }
-    }
-    cols.push(cur.trim());
-    const obj = {};
-    headers.forEach((h, i) => { obj[h] = (cols[i] || '').replace(/^"|"$/g, ''); });
-    return obj;
-  });
-}
-
-async function loadSheetsData() {
-  if (!SHEETS_CSV_URL || SHEETS_CSV_URL === 'SUA_URL_AQUI') return;
-  try {
-    const resp = await fetch(SHEETS_CSV_URL);
-    const text = await resp.text();
-    sheetsData = parseCSV(text);
-  } catch(e) {
-    console.warn('Planilha não carregada, usando algoritmo interno.', e);
-  }
-}
-
-function lookupSheets() {
-  if (!sheetsData) return null;
-  const key = `${answers.budget}|${answers.uso}|${answers.camera}|${answers.tela}|${answers.bateria}|${answers.tecnologia}|${answers.longevidade}`;
-  const row = sheetsData.find(r => {
-    const rKey = `${r.budget}|${r.uso}|${r.camera}|${r.tela}|${r.bateria}|${r.tecnologia}|${r.longevidade}`;
-    return rKey === key;
-  });
-  return row || null;
-}
-
-// ─── Render Intro ─────────────────────────────────────────────
 function renderIntro() {
   document.getElementById('question-area').innerHTML = `
     <div class="card slide-in" style="text-align:center">
-      <div class="loading-card" id="loading-indicator" style="display:${SHEETS_CSV_URL !== 'SUA_URL_AQUI' ? 'flex' : 'none'}">
-        <div class="spinner"></div>
-        <span>Carregando indicações personalizadas…</span>
-      </div>
       <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:24px;font-weight:300;">
-        São apenas <strong style="color:var(--text)">7 perguntas rápidas</strong> sobre como você usa o celular, quanto quer investir e o que realmente importa pra você. Sem tecniquês, sem enrolação.
+        São só <strong style="color:var(--text)">2 perguntas rápidas</strong>: quanto você quer investir, e o que mais importa pra você. Sem tecniquês, sem enrolação.
       </p>
-      <button class="btn btn-primary" style="width:100%;font-size:16px;padding:18px" onclick="startQuiz()" id="start-btn">
+      <button class="btn btn-primary" style="width:100%;font-size:16px;padding:18px" onclick="startQuiz()">
         Começar agora →
       </button>
     </div>`;
@@ -251,40 +225,33 @@ function renderIntro() {
   document.getElementById('progress-section').style.display = 'none';
 }
 
-async function initApp() {
-  renderIntro();
-  if (SHEETS_CSV_URL !== 'SUA_URL_AQUI') {
-    await loadSheetsData();
-    const ind = document.getElementById('loading-indicator');
-    if (ind) ind.style.display = 'none';
-  }
-}
-
 function startQuiz() {
-  current = 0;
+  currentId = 'budget';
+  history = [];
   document.getElementById('progress-section').style.display = 'block';
   document.getElementById('actions-area').style.display = 'flex';
   renderQuestion();
 }
 
 function renderQuestion() {
-  const q = questions[current];
-  const selected = answers[q.id];
-  const pct = Math.round((current / questions.length) * 100);
-  document.getElementById('progress-label').textContent = `Pergunta ${current+1} de ${questions.length}`;
+  const q = QUESTIONS[currentId];
+  const step = history.length + 1; // 1 or 2
+  selectedNext = null;
+  const pct = Math.round(((step-1) / 2) * 100);
+  document.getElementById('progress-label').textContent = `Pergunta ${step} de 2`;
   document.getElementById('progress-pct').textContent = `${pct}%`;
   document.getElementById('progress-fill').style.width = `${pct}%`;
-  document.getElementById('btn-back').style.display = current === 0 ? 'none' : 'block';
-  document.getElementById('btn-next').disabled = !selected;
+  document.getElementById('btn-back').style.display = history.length === 0 ? 'none' : 'block';
+  document.getElementById('btn-next').disabled = true;
 
   document.getElementById('question-area').innerHTML = `
     <div class="card slide-in">
-      <span class="question-num">Pergunta ${current+1}</span>
+      <span class="question-num">Pergunta ${step}</span>
       <span class="question-icon">${q.icon}</span>
       <div class="question-text">${q.text}</div>
       <div class="options">
-        ${q.options.map(opt=>`
-          <button class="option${selected===opt.value?' selected':''}" onclick="selectOption('${q.id}','${opt.value}')">
+        ${q.options.map((opt,i)=>`
+          <button class="option" data-idx="${i}" onclick="selectOption(${i})">
             <span class="option-icon">${opt.icon}</span>
             <div class="option-content">
               <div class="option-label">${opt.label}</div>
@@ -295,81 +262,54 @@ function renderQuestion() {
     </div>`;
 }
 
-function selectOption(qId, value) {
-  answers[qId] = value;
+function selectOption(idx) {
+  const q = QUESTIONS[currentId];
+  selectedNext = q.options[idx].next;
+  document.querySelectorAll('.option').forEach((el,i)=>{
+    el.classList.toggle('selected', i === idx);
+  });
   document.getElementById('btn-next').disabled = false;
-  renderQuestion();
 }
 
 function goNext() {
-  if (current < questions.length - 1) {
-    history.push(current); current++;
+  if (!selectedNext) return;
+  if (selectedNext.startsWith('result:')) {
+    showResult(selectedNext.replace('result:',''));
+  } else {
+    history.push(currentId);
+    currentId = selectedNext;
     renderQuestion();
-  } else { showResult(); }
+  }
 }
 
 function goBack() {
-  if (history.length > 0) { current = history.pop(); renderQuestion(); }
+  if (history.length > 0) {
+    currentId = history.pop();
+    renderQuestion();
+  }
 }
 
-// ─── Result ───────────────────────────────────────────────────
-function showResult() {
-  document.getElementById('progress-section').style.display = 'none';
+function showResult(key) {
+  document.getElementById('progress-fill').style.width = '100%';
+  document.getElementById('progress-pct').textContent = '100%';
+  document.getElementById('progress-label').textContent = 'Resultado';
   document.getElementById('actions-area').style.display = 'none';
   document.getElementById('intro-header').style.display = 'none';
 
-  const sheetRow = lookupSheets();
-
-  if (!sheetRow) {
-    document.getElementById('question-area').innerHTML = `
-      <div class="result-screen">
-        <div class="result-hero" style="text-align:center">
-          <div style="font-size:56px;margin-bottom:16px">🤔</div>
-          <div class="result-model" style="font-size:24px;margin-bottom:12px"><span>Combinação não encontrada</span></div>
-          <p class="result-desc">Essa combinação de respostas ainda não está na planilha. Tente refazer o quiz com outras escolhas.</p>
-        </div>
-        <button class="btn-restart" onclick="restartQuiz()">↺ Refazer o questionário</button>
-      </div>`;
-    return;
-  }
-
-  const model  = sheetRow['modelo_indicado'] || '—';
-  const desc   = sheetRow['descricao']       || '';
-  const pros   = (sheetRow['pros']   || '').split(';').map(s=>s.trim()).filter(Boolean);
-  const cons   = (sheetRow['contras']|| '').split(';').map(s=>s.trim()).filter(Boolean);
-  const imgUrl = sheetRow['imagem_url']   || '';
-  const link1  = sheetRow['link_compra_1']|| '';
-  const link2  = sheetRow['link_compra_2']|| '';
-
-  const imgHtml = imgUrl
-    ? `<img src="${imgUrl}" alt="${model}" class="result-img" onerror="this.style.display='none'">`
-    : `<div class="result-img-placeholder">📱</div>`;
-
-  const prosHtml = pros.length
-    ? pros.map(p=>`<li data-icon="→">${p}</li>`).join('')
-    : '<li data-icon="→">Verificar detalhes do modelo</li>';
-
-  const consHtml = cons.length
-    ? cons.map(c=>`<li data-icon="·">${c}</li>`).join('')
-    : '<li data-icon="·">—</li>';
-
-  const buyHtml = (link1 || link2) ? `
-    <div class="buy-buttons">
-      ${link1 ? `<a href="${link1}" target="_blank" rel="noopener" class="buy-btn buy-btn-primary">🛒 Comprar agora</a>` : ''}
-      ${link2 ? `<a href="${link2}" target="_blank" rel="noopener" class="buy-btn buy-btn-secondary">🔗 Ver opção 2</a>` : ''}
-    </div>` : '';
-
-  const sourceBadge = `<div style="text-align:center;margin-bottom:16px"><span class="source-badge">✦ Indicação personalizada</span></div>`;
+  const r = RESULTS[key];
+  const imgHtml = `<img src="${r.img}" alt="${r.name}" class="result-img" onerror="this.outerHTML='&lt;div class=\\'result-img-placeholder\\'&gt;📱&lt;/div&gt;'">`;
+  const prosHtml = r.pros.map(p=>`<li data-icon="→">${p}</li>`).join('');
+  const consHtml = r.cons.map(c=>`<li data-icon="·">${c}</li>`).join('');
 
   document.getElementById('question-area').innerHTML = `
     <div class="result-screen">
-      ${sourceBadge}
+      <div style="text-align:center"><span class="source-badge">✦ Sua recomendação</span></div>
       <div class="result-hero">
         ${imgHtml}
-        <div class="result-tag">✦ Sua recomendação</div>
-        <div class="result-model"><span>${model}</span></div>
-        <p class="result-desc">${desc}</p>
-        ${buyHtml}
+        <div class="result-tag">${r.tag}</div>
+        <div class="result-model"><span>${r.name}</span></div>
+        <div class="result-price">${r.price}</div>
+        <p class="result-desc">${r.desc}</p>
       </div>
       <div class="specs-grid">
         <div class="spec-card">
@@ -386,16 +326,13 @@ function showResult() {
 }
 
 function restartQuiz() {
-  answers = {}; history = []; current = -1;
+  currentId = 'budget'; history = []; selectedNext = null;
   document.getElementById('intro-header').style.display = 'block';
   document.getElementById('progress-fill').style.width = '0%';
   renderIntro();
-  // Reload sheets if configured
-  if (SHEETS_CSV_URL !== 'SUA_URL_AQUI') loadSheetsData();
 }
 
-initApp();
+renderIntro();
 </script>
-
 </body>
 </html>
